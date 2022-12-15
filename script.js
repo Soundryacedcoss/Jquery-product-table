@@ -1,19 +1,11 @@
 var arr = [];
+
 function add() {
   var sku = document.getElementById("product_sku").value;
   var name = document.getElementById("product_name").value;
   var price = document.getElementById("product_price").value;
   var quantity = document.getElementById("product_quantity").value;
-
   
-  document.getElementById("product_sku").value="";
-  document.getElementById("product_name").value="";
-  document.getElementById("product_price").value="";
-  document.getElementById("product_quantity").value="";
-
-
-  
-
   // Here i am creating Object
   var obj = {
     sku1: sku,
@@ -21,87 +13,24 @@ function add() {
     price1: price,
     quantity1: quantity,
   };
-
   // validation condition
-  if (sku == "" && name == "" && price == "" && quantity == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter name and Sku price and quantity :(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (sku == "" && name == "" && price == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Sku name and price :(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (sku == "" && name == "" && quantity == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Sku name and quantity :(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (price == "" && name == "" && quantity == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter price name and quantity :(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (sku == "" && name == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Sku and name:(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (sku == "" && price == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Sku and price:(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (sku == "" && quantity == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Sku and quantity:(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (price == "" && name == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter price and  name :(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (price == "" && quantity == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter price and  quantity :(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (name == "" && quantity == "") {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter name and  quantity :(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (isNaN(price)) {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Right price:(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (isNaN(quantity)) {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Right quantity:(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (!isNaN(name)) {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Right name:(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
-  } else if (isNaN(sku)) {
-    document.getElementsByClassName("error")[0].innerHTML =
-      "Please Enter Right sku value:(";
-    document.getElementsByClassName("error")[0].style.display = "block";
-    document.getElementsByClassName("success")[0].style.display = "none";
+  if(obj.sku1=="" || obj.name1=="" || obj.price1=="" || obj.quantity=="" || !isNaN(obj.name1)){
+    validation(obj);
   }
-  else {
+  else{
     arr.push(obj);
     document.getElementsByClassName("error")[0].style.display = "none";
     document.getElementsByClassName("success")[0].style.display = "block";
+    document.getElementById("product_sku").value="";
+     document.getElementById("product_name").value="";
+    document.getElementById("product_price").value="";
+     document.getElementById("product_quantity").value="";
     display();
   }
   
+  
 }
+
 function display() {
 var table = '<table><tr><th>SKU</th><th>Name</th><th>Quantity</th><th>price</th><th>Action</th></tr>'
 
@@ -121,15 +50,16 @@ var table = '<table><tr><th>SKU</th><th>Name</th><th>Quantity</th><th>price</th>
       '\')" >Edit</a><a href="#"class="delete"  onclick="del(\'' +
       element.sku1 +
       '\')">Delete</a>';
-    ("</td></tr>");
-    document.getElementById("p1").innerHTML = table;
-    
+    ("</td></tr>");  
   }));
+  table+='</table>'
+  document.getElementById("p1").innerHTML = table;
 }
 // here i have created a function for  delete the data 
 function del(val1) {
   for (let i = 0; i <= arr.length; i++) {
     if (val1== arr[i].sku1){
+      console.log(arr[i].sku1);
       arr.splice(i, 1);
     }
   }
@@ -151,6 +81,8 @@ function editing(val1) {
 // here i am hiding the notification by user on click button
 
 $(document).ready(function(){
+  $(".success").hide();
+  $(".error").hide();
     $(".close").click(function(){
       $(".success").hide();
     })
@@ -159,3 +91,63 @@ $(document).ready(function(){
     })
     
 });
+function validation(obj){
+  if (obj.sku1 == "" && obj.name1 == "" && obj.price1 == "" && obj.quantity1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter name and Sku price and quantity :(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } 
+  else if (obj.sku1 == "" && obj.name1 == "" && obj.price1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter Sku name and price :(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.sku1 == "" && obj.name1 == "" && obj.quantity1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter Sku name and quantity :(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } 
+   else if (!isNaN(obj.name1)) {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter Right name:(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.price1 == "" && obj.name1 == "" && obj.quantity1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter price name and quantity :(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.sku1 == "" && obj.name1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter Sku and name:(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.sku1 == "" && obj.price1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter Sku and price:(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.sku1 == "" && obj.quantity1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter Sku and quantity:(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.price1 == "" && obj.name1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter price and  name :(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.price1 == "" && obj.quantity1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter price and  quantity :(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } else if (obj.name1 == "" && obj.quantity1 == "") {
+    document.getElementsByClassName("error")[0].innerHTML =
+      "Please Enter name and  quantity :(";
+    document.getElementsByClassName("error")[0].style.display = "block";
+    document.getElementsByClassName("success")[0].style.display = "none";
+  } 
+}
