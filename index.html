@@ -7,23 +7,24 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
+    <center>
     <div id="wrapper">
       <div id="add_product_form">
         <label for="product_sku">
           <span>Product SKU</span>
-          <input type="number" name="product_sku" id="product_sku" />
+          <input type="number" name="product_sku" class="input" id="product_sku" />
         </label>
         <label for="product_name">
           <span>Product Name</span>
-          <input type="text" name="product_name" id="product_name" />
+          <input type="text" name="product_name" class="input" id="product_name" />
         </label>
         <label for="product_price">
           <span>Product Price</span>
-          <input type="number" name="product_price" id="product_price" />
+          <input type="number" name="product_price" class="input" id="product_price" />
         </label>
         <label for="product_quantity">
           <span>Product Quantity</span>
-          <input type="number" name="product_quantity" id="product_quantity" />
+          <input type="number" name="product_quantity" class="input" id="product_quantity" />
         </label>
         <p class="submit">
           <input
@@ -37,10 +38,18 @@
       </div>
       <div id="notification">
         <div class="success">
-          Product Added Successfully.<a href="#" class="close">X</a>
+          Product Added Successfully
+          <div>
+            <a href="#" class="close">X</a>
+          </div>
+         
         </div>
         <div class="error">
-          There is some problem.<a href="#" class="close">X</a>
+          <a href="#" class="close">X</a>
+          <div class="errormsg">
+            There is some problem.
+          </div>
+         
         </div>
       </div>
       <div id="product_list">
@@ -48,6 +57,7 @@
         <p id="p1"></p>
       </div>
     </div>
+  </center>
   </body>
   <script src="script.js"></script>
 </html>
